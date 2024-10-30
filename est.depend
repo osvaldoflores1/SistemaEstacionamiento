@@ -1,0 +1,67 @@
+# depslib dependency file v1.0
+1729796297 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\main.cpp
+	<iostream>
+	"menuprincipal.h"
+	"menuvehiculos.h"
+	"fecha.h"
+
+1729651285 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\hora.cpp
+	"Hora.h"
+	<iostream>
+	<ctime>
+
+1729651285 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\hora.h
+	<string>
+
+1729651487 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menuprincipal.h
+
+1729796656 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menuvehiculos.h
+	"vehiculos.h"
+	"tipovehiculos.h"
+	"archivos.h"
+
+1729796610 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\fecha.h
+	<string>
+
+1729651839 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\fecha.cpp
+	"fecha.h"
+	<iostream>
+	<ctime>
+
+1729651696 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\vehiculos.h
+	<string>
+	"hora.h"
+
+1729651696 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\tipovehiculos.h
+
+1729651416 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivos.h
+	"vehiculos.h"
+	"tipovehiculos.h"
+	<string>
+
+1729652060 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menuprincipal.cpp
+	"menuprincipal.h"
+	"menuvehiculos.h"
+	<iostream>
+
+1729651839 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivos.cpp
+	"archivos.h"
+	<string>
+	<cstdio>
+	<iostream>
+
+1729652060 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menuvehiculos.cpp
+	"menuvehiculos.h"
+	<iostream>
+	<string>
+
+1729652061 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\tipovehiculos.cpp
+	"tipovehiculos.h"
+
+1729652061 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\vehiculos.cpp
+	"vehiculos.h"
+	"archivos.h"
+	<cstring>
+	<string>
+	<iostream>
+
