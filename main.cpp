@@ -1,24 +1,20 @@
 #include <iostream>
+#include <cstdlib>
+#include <string.h>
+#include <conio.h>
+#include <windows.h>
+
+#include "MenuManager.h"
 
 using namespace std;
-#include "menuprincipal.h"
-#include "menuvehiculos.h"
-#include "fecha.h"
-int main()
+
+int main ()
 {
-    fecha hoy;
-    menuvehiculos prueba;
-    //hora nueva;
 
-    //cout<<nueva.toString();
+    MenuManager menu;
 
-    //prueba.mostrar();
-
-    //cout<<hoy.toString();
-
-    MenuPrincipal estacionamiento;
-    estacionamiento.Ejecutar();
-
-
-  return 0;
+    menu.menuPrincipal();
+    return 0;
 }
+
+

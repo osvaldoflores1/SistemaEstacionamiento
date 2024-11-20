@@ -1,6 +1,0 @@
-#ifndef HORA,H_H_INCLUDED
-#define HORA,H_H_INCLUDED
-
-
-
-#endif // HORA,H_H_INCLUDED

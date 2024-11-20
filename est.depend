@@ -1,9 +1,11 @@
 # depslib dependency file v1.0
-1729796297 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\main.cpp
+1730838599 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\main.cpp
 	<iostream>
-	"menuprincipal.h"
-	"menuvehiculos.h"
-	"fecha.h"
+	<cstdlib>
+	<string.h>
+	<conio.h>
+	<windows.h>
+	"MenuManager.h"
 
 1729651285 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\hora.cpp
 	"Hora.h"
@@ -13,7 +15,7 @@
 1729651285 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\hora.h
 	<string>
 
-1729651487 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menuprincipal.h
+1730663348 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menuprincipal.h
 
 1729796656 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menuvehiculos.h
 	"vehiculos.h"
@@ -64,4 +66,53 @@
 	<cstring>
 	<string>
 	<iostream>
+
+1731695325 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menumanager.h
+
+1732134854 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menumanager.cpp
+	"MenuManager.h"
+	<iostream>
+	"Vehiculo.h"
+	"Estacionamiento.h"
+	"ArchivosManager.h"
+	"Precio.h"
+
+1731862715 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\vehiculo.cpp
+	<iostream>
+	<cstring>
+	<string>
+	"Vehiculo.h"
+
+1731859820 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\vehiculo.h
+	<string>
+
+1730851858 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\estacionamiento.cpp
+	"Estacionamiento.h"
+	<cstring>
+
+1730851445 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\estacionamiento.h
+
+1732134437 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivosmanager.cpp
+	"ArchivosManager.h"
+	<cstring>
+	<cstdio>
+	<iostream>
+	"Estacionamiento.h"
+	"Precio.h"
+
+1732134513 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivosmanager.h
+	"Estacionamiento.h"
+	"Precio.h"
+	<iostream>
+	<cstring>
+	<cstdio>
+
+1731778493 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\precio.cpp
+	<iostream>
+	<cstring>
+	<string>
+	"Precio.h"
+
+1731944118 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\precio.h
+	<string>
 

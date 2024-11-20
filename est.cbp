@@ -32,47 +32,17 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="archivos.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="archivos.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="fecha.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="fecha.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="hora.cpp" />
-		<Unit filename="hora.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="ArchivosManager.cpp" />
+		<Unit filename="ArchivosManager.h" />
+		<Unit filename="Estacionamiento.cpp" />
+		<Unit filename="Estacionamiento.h" />
+		<Unit filename="MenuManager.cpp" />
+		<Unit filename="MenuManager.h" />
+		<Unit filename="Precio.cpp" />
+		<Unit filename="Precio.h" />
+		<Unit filename="Vehiculo.cpp" />
+		<Unit filename="Vehiculo.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="menuprincipal.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="menuprincipal.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="menuvehiculos.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="menuvehiculos.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="tipovehiculos.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="tipovehiculos.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="vehiculos.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="vehiculos.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
