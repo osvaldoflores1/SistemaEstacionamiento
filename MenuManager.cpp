@@ -19,7 +19,8 @@ void MenuManager::menuPrincipal() {
         cout << "3. INGRESO DE VEHICULOS" << endl;
         cout << "4. EGRESO DE VEHICULOS" << endl;
         cout << "5. MODIFICACION DE PRECIOS" << endl;
-        cout << "6. REPORTES" << endl;
+        cout << "6. LISTADO DE VEHICULOS INGRESADOS" << endl;
+        cout << "7. REPORTES" << endl;
         cout << "0. SALIR" << endl;
         cout << "Seleccione una opcion: ";
         cin >> seleccion;
@@ -41,6 +42,11 @@ void MenuManager::menuPrincipal() {
             case 5:
                 menuModificacionPrecios();
                 break;
+
+            case 6:
+                listadoVehiculos();
+                break;
+
             case 0:
                 finDeMenu = true; // Salir del menú
                 break;
@@ -115,23 +121,31 @@ void MenuManager::lugaresDisponibles() {
 
 }
 void MenuManager::menuIngresoVehiculos() {
-    system("cls");
+
+
+    ArchivosManager archivoVehiculosIngresados("vehiculosingresados");
+    Vehiculo nuevoVehiculo;
     cout << "INGRESO DE VEHICULOS" << endl;
-    // Aquí puedes implementar la lógica para ingresar un vehículo
+    cout << "--------------------"<< endl;
     char patente[30];
     int tipoVehiculo;
 
-    cout << "Ingrese la patente del vehículo: ";
-    cin >> patente;
+    cout << "Ingrese la patente del vehiculo: ";
+    cin.ignore();
+    cin.getline(patente, 30);
     cout << "Ingrese el tipo de vehículo (1=Auto, 2=Camioneta): ";
     cin >> tipoVehiculo;
 
-    Vehiculo nuevoVehiculo;
+
     nuevoVehiculo.setPatente(patente);
     nuevoVehiculo.setTipo(tipoVehiculo);
 
-    cout << "Vehículo ingresado correctamente." << endl;
-    system("pause");
+
+     if (archivoVehiculosIngresados.guardarVehiculo(nuevoVehiculo)) {
+        cout << "Estacionamiento guardado con éxito.\n";
+    } else {
+        cout << "Error al guardar el estacionamiento.\n";
+    }
 }
 
 
@@ -207,7 +221,7 @@ void MenuManager:: menuModificacionPrecios(){
             cin >> opcion;
 
             if (opcion < 1 || opcion > 6) {
-                cout << "Opción no válida." << endl;
+                cout << "Opción no valida." << endl;
                 system("pause");
                 return;
             }
@@ -222,3 +236,28 @@ void MenuManager:: menuModificacionPrecios(){
 
 }
 
+void MenuManager:: listadoVehiculos(){
+
+FILE *p = fopen("vehiculosingresados", "rb");
+    if (!p) {
+        cout << "No se pudo abrir el archivo de Vehiculos." << endl;
+        return;
+    }
+
+    Vehiculo reg;
+
+
+    cout << "Listado de vehiculos:" << endl;
+    while (fread(&reg, sizeof(Vehiculo), 1, p)) {
+        cout << "---------------------------------"<< endl;
+        cout << "PATENTE:  " << reg.getPatente() << endl;
+        cout << "TIPO:  " << reg.getTipo() << endl;
+        cout << "---------------------------------"<< endl;
+    }
+
+    fclose(p);
+    system("pause");
+
+
+
+}

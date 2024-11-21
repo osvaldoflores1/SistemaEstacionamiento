@@ -65,40 +65,51 @@ Precio ArchivosManager::leerPrecio(int pos) {
 }
 
 //// Metodo para modificar un precio
-void ArchivosManager::modificarPrecio(int indice, int nuevoPrecio) {
-    Precio reg;
-    FILE* p = fopen(_nombreArchivo, "rb+"); // Abrir archivo en modo lectura/escritura
+bool ArchivosManager::modificarPrecio(int campo, int nuevoValor) {
+
+    FILE* p = fopen(_nombreArchivo, "rb+"); // Modo de lectura y escritura
     if (p == NULL) {
-        cout << "Error al abrir el archivo." << endl;
-        return;
+        return false;
     }
 
-    // Desplazar al registro indicado por el índice
-    fseek(p, indice * sizeof(Precio), SEEK_SET);
+    Precio precio;
+    if (fread(&precio, sizeof(Precio), 1, p) != 1) { // Leer el primer registro
+        fclose(p);
+        return false;
+    }
 
-    // Leer el registro actual
-    fread(&reg, sizeof(Precio), 1, p);
-
-    // Actualizar el valor del precio correspondiente
-    switch (indice) {
-        case 0: reg.setPrecioHoraAuto(nuevoPrecio); break;
-        case 1: reg.setPrecioDiaAuto(nuevoPrecio); break;
-        case 2: reg.setPrecioMesAuto(nuevoPrecio); break;
-        case 3: reg.setPrecioHoraCamioneta(nuevoPrecio); break;
-        case 4: reg.setPrecioDiaCamioneta(nuevoPrecio); break;
-        case 5: reg.setPrecioMesCamioneta(nuevoPrecio); break;
+    // Modificar el campo especificado
+    switch (campo) {
+        case 0: precio.setPrecioHoraAuto(nuevoValor); break;
+        case 1: precio.setPrecioDiaAuto(nuevoValor); break;
+        case 2: precio.setPrecioMesAuto(nuevoValor); break;
+        case 3: precio.setPrecioHoraCamioneta(nuevoValor); break;
+        case 4: precio.setPrecioDiaCamioneta(nuevoValor); break;
+        case 5: precio.setPrecioMesCamioneta(nuevoValor); break;
         default:
-            cout << "Índice no válido." << endl;
             fclose(p);
-            return;
+            return false; // Campo no válido
     }
 
-    // Volver al inicio del registro para sobrescribir
-    fseek(p, indice * sizeof(Precio), SEEK_SET);
-    fwrite(&reg, sizeof(Precio), 1, p);
+    fseek(p, 0, SEEK_SET); // Mover el puntero al inicio del archivo
+    if (fwrite(&precio, sizeof(Precio), 1, p) != 1) { // Sobrescribir el registro
+        fclose(p);
+        return false;
+    }
 
     fclose(p);
-    cout << "Precio actualizado correctamente." << endl;
+    return true;
+
 }
 
 
+///METODO PARA GUARDAR UN VEHICULO QUE INGRESÓ
+
+bool ArchivosManager::guardarVehiculo(Vehiculo reg){
+        FILE *p;
+        p=fopen(_nombreArchivo, "ab");
+        if(p==NULL) return false;
+        int escribio=fwrite(&reg, sizeof reg,1, p);
+        fclose(p);
+        return escribio;
+    }

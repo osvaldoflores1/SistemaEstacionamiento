@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdio>
+#include "Vehiculo.h"
 
 class ArchivosManager {
 private:
@@ -23,5 +24,8 @@ public:
      Precio leerPrecio(int pos);
 
     /// METODO PARA MODIFICAR PRECIOS
-    void modificarPrecio(int indice, int nuevoPrecio);
+    bool modificarPrecio(int pos, int nuevoPrecio);
+
+
+    bool guardarVehiculo(Vehiculo reg);
 };

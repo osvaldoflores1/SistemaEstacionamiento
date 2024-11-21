@@ -10,6 +10,7 @@ public:
     void menuIngresoVehiculos();
     void menuEgresoVehiculos();
     void menuModificacionPrecios();
+    void listadoVehiculos();
 };
 
 #endif
