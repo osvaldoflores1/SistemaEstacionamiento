@@ -69,7 +69,7 @@
 
 1732231695 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menumanager.h
 
-1732231695 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menumanager.cpp
+1732292230 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menumanager.cpp
 	"MenuManager.h"
 	<iostream>
 	"Vehiculo.h"
@@ -77,14 +77,15 @@
 	"ArchivosManager.h"
 	"Precio.h"
 
-1731862715 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\vehiculo.cpp
+1732280662 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\vehiculo.cpp
 	<iostream>
 	<cstring>
 	<string>
 	"Vehiculo.h"
 
-1732220505 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\vehiculo.h
+1732280662 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\vehiculo.h
 	<string>
+	<ctime>
 
 1730851858 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\estacionamiento.cpp
 	"Estacionamiento.h"
@@ -92,15 +93,16 @@
 
 1730851445 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\estacionamiento.h
 
-1732224899 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivosmanager.cpp
+1732292475 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivosmanager.cpp
 	"ArchivosManager.h"
 	<cstring>
 	<cstdio>
 	<iostream>
 	"Estacionamiento.h"
 	"Precio.h"
+	<fstream>
 
-1732225397 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivosmanager.h
+1732290998 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivosmanager.h
 	"Estacionamiento.h"
 	"Precio.h"
 	<iostream>
@@ -114,6 +116,11 @@
 	<string>
 	"Precio.h"
 
-1731944118 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\precio.h
+1732281862 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\precio.h
 	<string>
+
+1732279634 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\fechahora.h
+	<iostream>
+	<ctime>
+	<iomanip>
 

@@ -28,3 +28,20 @@ int Vehiculo::getTipo() const {
     return _tipoVehiculo;
 }
 
+
+
+void Vehiculo :: setFechaHoraIngreso(std::time_t fechaHora) {
+        _fechaHoraIngreso = fechaHora;
+    }
+
+std::time_t Vehiculo:: getFechaHoraIngreso() const {
+        return _fechaHoraIngreso;
+    }
+
+
+ std::string Vehiculo::getFechaHoraIngresoFormato() const {
+        char buffer[30];
+        std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", std::localtime(&_fechaHoraIngreso));
+        return std::string(buffer);
+    }
+

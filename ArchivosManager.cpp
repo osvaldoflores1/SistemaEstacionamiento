@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Estacionamiento.h"
 #include "Precio.h"
+#include <fstream>
 using namespace std;
 
 // Constructor
@@ -113,3 +114,57 @@ bool ArchivosManager::guardarVehiculo(Vehiculo reg){
         fclose(p);
         return escribio;
     }
+
+
+
+///METODO PARA BUSCAR  POR PATENTE
+bool ArchivosManager::buscarVehiculoPorPatente(const char* patente, Vehiculo& vehiculoEncontrado) {
+    ifstream file(_nombreArchivo, std::ios::binary);
+    if (!file) return false;
+
+    Vehiculo vehiculo;
+    while (file.read(reinterpret_cast<char*>(&vehiculo), sizeof(Vehiculo))) {
+        if (strcmp(vehiculo.getPatente(), patente) == 0) {
+            vehiculoEncontrado = vehiculo;
+            return true;
+        }
+    }
+    return false;
+}
+bool ArchivosManager::eliminarVehiculoPorPatente(const char* patente) {
+    std::ifstream file(_nombreArchivo, std::ios::binary);
+    if (!file) {
+        std::cerr << "Error al abrir el archivo: " << _nombreArchivo << std::endl;
+        return false;
+    }
+
+    std::ofstream tempFile("temp.bin", std::ios::binary);
+    if (!tempFile) {
+        std::cerr << "Error al crear archivo temporal." << std::endl;
+        return false;
+    }
+
+    Vehiculo vehiculo;
+    bool encontrado = false;
+
+    while (file.read(reinterpret_cast<char*>(&vehiculo), sizeof(Vehiculo))) {
+        if (strcmp(vehiculo.getPatente(), patente) != 0) {
+            tempFile.write(reinterpret_cast<const char*>(&vehiculo), sizeof(Vehiculo));
+        } else {
+            encontrado = true;
+        }
+    }
+
+    file.close();
+    tempFile.close();
+
+    if (encontrado) {
+        remove(_nombreArchivo);            // Elimina el archivo original
+        rename("temp.bin", _nombreArchivo); // Renombra el archivo temporal
+    } else {
+        remove("temp.bin"); // No se encontró el vehículo, elimina el archivo temporal
+    }
+
+    return encontrado;
+}
+

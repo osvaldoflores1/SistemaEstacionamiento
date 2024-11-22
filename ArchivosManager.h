@@ -28,4 +28,12 @@ public:
 
 
     bool guardarVehiculo(Vehiculo reg);
+
+
+    /// METODO PARA BUSCAR POR PATENTE
+    bool buscarVehiculoPorPatente(const char* patente, Vehiculo& vehiculoEncontrado);
+
+    bool eliminarVehiculoPorPatente(const char* patente);
+
+
 };

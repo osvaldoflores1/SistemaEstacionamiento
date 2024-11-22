@@ -139,7 +139,8 @@ void MenuManager::menuIngresoVehiculos() {
 
     nuevoVehiculo.setPatente(patente);
     nuevoVehiculo.setTipo(tipoVehiculo);
-
+    time_t fechaHoraActual = time(nullptr); // Obtiene la fecha y hora actual
+    nuevoVehiculo.setFechaHoraIngreso(fechaHoraActual);
 
      if (archivoVehiculosIngresados.guardarVehiculo(nuevoVehiculo)) {
         cout << "Estacionamiento guardado con éxito.\n";
@@ -152,14 +153,51 @@ void MenuManager::menuIngresoVehiculos() {
 void MenuManager::menuEgresoVehiculos() {
     system("cls");
     cout << "EGRESO DE VEHICULOS" << endl;
-    // Aquí puedes implementar la lógica para el egreso de un vehículo
+    cout << "-------------------" << endl;
+
     char patente[30];
-
     cout << "Ingrese la patente del vehículo a egresar: ";
-    cin >> patente;
-    // Lógica para calcular tarifas y registrar el egreso...
+    cin.ignore();
+    cin.getline(patente, 30);
 
-    cout << "Vehículo egresado correctamente." << endl;
+    ArchivosManager archivoVehiculosIngresados("vehiculosingresados");
+    Vehiculo vehiculoEncontrado;
+
+    // Buscar el vehículo por la patente
+    if (!archivoVehiculosIngresados.buscarVehiculoPorPatente(patente, vehiculoEncontrado)) {
+        cout << "Vehículo no encontrado en el registro de ingresos." << endl;
+        system("pause");
+        return;
+    }
+
+    // Obtener la fecha y hora actual
+    time_t fechaHoraActual = time(nullptr);
+
+    // Calcular la diferencia en horas
+    time_t fechaHoraIngreso = vehiculoEncontrado.getFechaHoraIngreso();
+    double diferenciaSegundos = difftime(fechaHoraActual, fechaHoraIngreso);
+    double diferenciaHoras = (diferenciaSegundos / 3600.0); // Redondear al alza a la siguiente hora completa
+
+    // Calcular la tarifa según el tipo de vehículo
+    int tipoVehiculo = vehiculoEncontrado.getTipo();
+    double tarifaHora = (tipoVehiculo == 1) ? 50.0 : 75.0; // Ejemplo: 50 para autos, 75 para camionetas
+    double total = tarifaHora * diferenciaHoras;
+
+    // Mostrar resultados
+    cout << "Detalles del egreso:" << endl;
+    cout << "Patente: " << vehiculoEncontrado.getPatente() << endl;
+    cout << "Tipo de vehículo: " << (tipoVehiculo == 1 ? "Auto" : "Camioneta") << endl;
+    cout << "Horas estacionado: " << diferenciaHoras << endl;
+    cout << "Tarifa por hora: $" << tarifaHora << endl;
+    cout << "Total a pagar: $" << total << endl;
+
+    // Eliminar el vehículo del archivo de ingresos
+    if (archivoVehiculosIngresados.eliminarVehiculoPorPatente(patente)) {
+        cout << "Vehículo registrado como egresado correctamente." << endl;
+    } else {
+        cout << "Error al eliminar el vehículo del registro de ingresos." << endl;
+    }
+
     system("pause");
 }
 
@@ -252,6 +290,7 @@ FILE *p = fopen("vehiculosingresados", "rb");
         cout << "---------------------------------"<< endl;
         cout << "PATENTE:  " << reg.getPatente() << endl;
         cout << "TIPO:  " << reg.getTipo() << endl;
+        cout << "HORARIO DE INGRESO: " << reg.getFechaHoraIngresoFormato()<<endl;
         cout << "---------------------------------"<< endl;
     }
 
