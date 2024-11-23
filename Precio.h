@@ -4,30 +4,30 @@
 class Precio{
 
 private:
-    int _precioHoraAuto;
-    int _precioDiaAuto;
-    int _precioMesAuto;
+    float _precioHoraAuto;
+    float _precioDiaAuto;
+    float _precioMesAuto;
 
-    int _precioHoraCamioneta;
-    int _precioDiaCamioneta;
-    int _precioMesCamioneta;
+    float _precioHoraCamioneta;
+    float _precioDiaCamioneta;
+    float _precioMesCamioneta;
 
 public:
-    void setPrecioHoraAuto(int precioHoraAuto);
-    void setPrecioDiaAuto (int precioDiaAuto);
-    void setPrecioMesAuto(int precioMesAuto);
+    void setPrecioHoraAuto(float precioHoraAuto);
+    void setPrecioDiaAuto (float precioDiaAuto);
+    void setPrecioMesAuto(float precioMesAuto);
 
 
-    void setPrecioHoraCamioneta(int precioHoraCamioneta);
-    void setPrecioDiaCamioneta (int precioDiaCamioneta);
-    void setPrecioMesCamioneta(int precioMesCamioneta);
+    void setPrecioHoraCamioneta(float precioHoraCamioneta);
+    void setPrecioDiaCamioneta (float precioDiaCamioneta);
+    void setPrecioMesCamioneta(float precioMesCamioneta);
 
 
-    int getPrecioHoraAuto() const;
-    int getPrecioDiaAuto() const;
-    int getPrecioMesAuto() const;
+    float getPrecioHoraAuto() const;
+    float getPrecioDiaAuto() const;
+    float getPrecioMesAuto() const;
 
-    int getPrecioHoraCamioneta() const;
-    int getPrecioDiaCamioneta() const;
-    int getPrecioMesCamioneta() const;
+    float getPrecioHoraCamioneta() const;
+    float getPrecioDiaCamioneta() const;
+    float getPrecioMesCamioneta() const;
 };

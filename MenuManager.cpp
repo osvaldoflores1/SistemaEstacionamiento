@@ -4,6 +4,8 @@
 #include "Estacionamiento.h"
 #include "ArchivosManager.h"
 #include "Precio.h"
+#include <cstring>
+#include <fstream>
 using namespace std;
 
 void MenuManager::menuPrincipal() {
@@ -46,13 +48,16 @@ void MenuManager::menuPrincipal() {
             case 6:
                 listadoVehiculos();
                 break;
+            case 7:
+
+                break;
 
             case 0:
-                finDeMenu = true; // Salir del menú
+                finDeMenu = true;
                 break;
             default:
                 cout << "Opcion no valida. Intente de nuevo." << endl;
-                system("pause"); // Pausa para que el usuario lea el mensaje
+                system("pause");
                 break;
         }
     }
@@ -122,7 +127,8 @@ void MenuManager::lugaresDisponibles() {
 }
 void MenuManager::menuIngresoVehiculos() {
 
-
+    ArchivosManager archivoEstacionamiento("estacionamientos");
+    Estacionamiento estadoActual = archivoEstacionamiento.leerEstacionamiento(0);
     ArchivosManager archivoVehiculosIngresados("vehiculosingresados");
     Vehiculo nuevoVehiculo;
     cout << "INGRESO DE VEHICULOS" << endl;
@@ -143,7 +149,9 @@ void MenuManager::menuIngresoVehiculos() {
     nuevoVehiculo.setFechaHoraIngreso(fechaHoraActual);
 
      if (archivoVehiculosIngresados.guardarVehiculo(nuevoVehiculo)) {
-        cout << "Estacionamiento guardado con éxito.\n";
+        estadoActual.setLugaresDisponibles(estadoActual.getLugaresDisponibles() -1);
+        archivoEstacionamiento.actualizarEstacionamiento(0, estadoActual);
+        cout << "Estacionamiento guardado con exito.\n";
     } else {
         cout << "Error al guardar el estacionamiento.\n";
     }
@@ -151,51 +159,55 @@ void MenuManager::menuIngresoVehiculos() {
 
 
 void MenuManager::menuEgresoVehiculos() {
-    system("cls");
+    ArchivosManager archivoEstacionamiento("estacionamientos");
+    Estacionamiento estadoActual = archivoEstacionamiento.leerEstacionamiento(0);
+
+
+     system("cls");
     cout << "EGRESO DE VEHICULOS" << endl;
-    cout << "-------------------" << endl;
+    cout << "--------------------" << endl;
 
     char patente[30];
-    cout << "Ingrese la patente del vehículo a egresar: ";
-    cin.ignore();
-    cin.getline(patente, 30);
+    cout << "Ingrese la patente del vehiculo a egresar: ";
+    cin >> patente;
 
-    ArchivosManager archivoVehiculosIngresados("vehiculosingresados");
+    ArchivosManager archivoVehiculos("vehiculosingresados");
     Vehiculo vehiculoEncontrado;
 
-    // Buscar el vehículo por la patente
-    if (!archivoVehiculosIngresados.buscarVehiculoPorPatente(patente, vehiculoEncontrado)) {
-        cout << "Vehículo no encontrado en el registro de ingresos." << endl;
+    if (!archivoVehiculos.buscarVehiculoPorPatente(patente, vehiculoEncontrado)) {
+        cout << "Vehiculo no encontrado." << endl;
         system("pause");
         return;
     }
 
-    // Obtener la fecha y hora actual
-    time_t fechaHoraActual = time(nullptr);
+    // Leer precios del archivo
+    ArchivosManager archivoPrecios("precios");
+    float precios[6];
+    if (!archivoPrecios.leerPrecios(precios)) {
+        cout << "Error al leer los precios." << endl;
+        system("pause");
+        return;
+    }
 
-    // Calcular la diferencia en horas
-    time_t fechaHoraIngreso = vehiculoEncontrado.getFechaHoraIngreso();
-    double diferenciaSegundos = difftime(fechaHoraActual, fechaHoraIngreso);
-    double diferenciaHoras = (diferenciaSegundos / 3600.0); // Redondear al alza a la siguiente hora completa
+    // Calcular el tiempo de estacionamiento
+    time_t fechaEgreso = time(nullptr);
+    double horasEstacionado = difftime(fechaEgreso, vehiculoEncontrado.getFechaHoraIngreso()) / 3600;
 
-    // Calcular la tarifa según el tipo de vehículo
-    int tipoVehiculo = vehiculoEncontrado.getTipo();
-    double tarifaHora = (tipoVehiculo == 1) ? 50.0 : 75.0; // Ejemplo: 50 para autos, 75 para camionetas
-    double total = tarifaHora * diferenciaHoras;
+    // Determinar el tipo de vehículo y precio por hora
+    int indicePrecio = (vehiculoEncontrado.getTipo() == 1) ? 0 : 3; // Auto o camioneta
+    float precioFinal = horasEstacionado * precios[indicePrecio];
 
-    // Mostrar resultados
-    cout << "Detalles del egreso:" << endl;
-    cout << "Patente: " << vehiculoEncontrado.getPatente() << endl;
-    cout << "Tipo de vehículo: " << (tipoVehiculo == 1 ? "Auto" : "Camioneta") << endl;
-    cout << "Horas estacionado: " << diferenciaHoras << endl;
-    cout << "Tarifa por hora: $" << tarifaHora << endl;
-    cout << "Total a pagar: $" << total << endl;
+    cout << "Horas estacionado: " << horasEstacionado << endl;
+    cout << "Precio por hora: $" << precios[indicePrecio] << endl;
+    cout << "Total a pagar: $" << precioFinal << endl;
 
-    // Eliminar el vehículo del archivo de ingresos
-    if (archivoVehiculosIngresados.eliminarVehiculoPorPatente(patente)) {
-        cout << "Vehículo registrado como egresado correctamente." << endl;
+    // Eliminar el vehículo del archivo
+    if (archivoVehiculos.eliminarVehiculoPorPatente(patente)) {
+    estadoActual.setLugaresDisponibles(estadoActual.getLugaresDisponibles() + 1);
+    archivoEstacionamiento.actualizarEstacionamiento(0, estadoActual);
+        cout << "Vehiculo egresado correctamente." << endl;
     } else {
-        cout << "Error al eliminar el vehículo del registro de ingresos." << endl;
+        cout << "Error al registrar el egreso del vehiculo." << endl;
     }
 
     system("pause");
@@ -300,3 +312,10 @@ FILE *p = fopen("vehiculosingresados", "rb");
 
 
 }
+
+
+
+
+
+
+

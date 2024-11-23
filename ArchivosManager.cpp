@@ -38,6 +38,17 @@ Estacionamiento ArchivosManager::leerEstacionamiento(int pos) {
     return reg;
 }
 
+bool ArchivosManager::actualizarEstacionamiento(int pos, const Estacionamiento& nuevoEstado) {
+    FILE *p = fopen(_nombreArchivo, "rb+");
+    if (p == NULL) {
+        return false;
+    }
+    fseek(p, pos * sizeof nuevoEstado, 0);
+    fwrite(&nuevoEstado, sizeof nuevoEstado, 1, p);
+    fclose(p);
+    return true;
+}
+
 
 
 // Método para guardar un objeto Precio en el archivo
@@ -52,29 +63,28 @@ bool ArchivosManager::guardarPrecio(Precio reg){
 
 
 // Método para leer un objeto Precio desde el archivo
-Precio ArchivosManager::leerPrecio(int pos) {
-    Precio reg;
-    FILE *p = fopen(_nombreArchivo, "rb");
-    if (p == NULL) {
+bool ArchivosManager::leerPrecios(float precios[]) {
+    std::ifstream file(_nombreArchivo, std::ios::binary);
+    if (!file) return false;
 
-        return reg;
+    for (int i = 0; i < 6; ++i) {
+        file.read(reinterpret_cast<char*>(&precios[i]), sizeof(float));
+        if (!file) return false; // Error en la lectura
     }
-    fseek(p, pos * sizeof reg, 0);
-    fread(&reg, sizeof reg, 1, p);
-    fclose(p);
-    return reg;
+
+    file.close();
+    return true;
 }
 
-//// Metodo para modificar un precio
-bool ArchivosManager::modificarPrecio(int campo, int nuevoValor) {
+bool ArchivosManager::modificarPrecio(int campo, float nuevoValor) {
 
-    FILE* p = fopen(_nombreArchivo, "rb+"); // Modo de lectura y escritura
+    FILE* p = fopen(_nombreArchivo, "rb+");
     if (p == NULL) {
         return false;
     }
 
     Precio precio;
-    if (fread(&precio, sizeof(Precio), 1, p) != 1) { // Leer el primer registro
+    if (fread(&precio, sizeof(Precio), 1, p) != 1) {
         fclose(p);
         return false;
     }
@@ -89,11 +99,11 @@ bool ArchivosManager::modificarPrecio(int campo, int nuevoValor) {
         case 5: precio.setPrecioMesCamioneta(nuevoValor); break;
         default:
             fclose(p);
-            return false; // Campo no válido
+            return false;
     }
 
-    fseek(p, 0, SEEK_SET); // Mover el puntero al inicio del archivo
-    if (fwrite(&precio, sizeof(Precio), 1, p) != 1) { // Sobrescribir el registro
+    fseek(p, 0, SEEK_SET);
+    if (fwrite(&precio, sizeof(Precio), 1, p) != 1) {
         fclose(p);
         return false;
     }
@@ -159,10 +169,10 @@ bool ArchivosManager::eliminarVehiculoPorPatente(const char* patente) {
     tempFile.close();
 
     if (encontrado) {
-        remove(_nombreArchivo);            // Elimina el archivo original
-        rename("temp.bin", _nombreArchivo); // Renombra el archivo temporal
+        remove(_nombreArchivo);
+        rename("temp.bin", _nombreArchivo);
     } else {
-        remove("temp.bin"); // No se encontró el vehículo, elimina el archivo temporal
+        remove("temp.bin");
     }
 
     return encontrado;

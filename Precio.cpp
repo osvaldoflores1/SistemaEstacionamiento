@@ -8,24 +8,24 @@ using namespace std;
 
 
 ////GETTERS DE AUTO
-int Precio::getPrecioHoraAuto() const {
+float Precio::getPrecioHoraAuto() const {
     return _precioHoraAuto;
 }
-int Precio::getPrecioDiaAuto() const {
+float Precio::getPrecioDiaAuto() const {
     return _precioDiaAuto;
 }
-int Precio::getPrecioMesAuto() const {
+float Precio::getPrecioMesAuto() const {
     return _precioMesAuto;
 }
 
 ///// GETTERS DE  CAMIONETA
-int Precio::getPrecioHoraCamioneta() const {
+float Precio::getPrecioHoraCamioneta() const {
     return _precioHoraCamioneta;
 }
-int Precio::getPrecioDiaCamioneta() const {
+float Precio::getPrecioDiaCamioneta() const {
     return _precioDiaCamioneta;
 }
-int Precio::getPrecioMesCamioneta() const {
+float Precio::getPrecioMesCamioneta() const {
     return _precioMesCamioneta;
 }
 
@@ -33,14 +33,14 @@ int Precio::getPrecioMesCamioneta() const {
 
 
 ////SETTERS DE AUTO
-void Precio::setPrecioHoraAuto(int precioHoraAuto) {
+void Precio::setPrecioHoraAuto(float precioHoraAuto) {
     _precioHoraAuto = precioHoraAuto;
 }
 
-void Precio::setPrecioDiaAuto(int precioDiaAuto) {
+void Precio::setPrecioDiaAuto(float precioDiaAuto) {
     _precioDiaAuto = precioDiaAuto;
 }
-void Precio::setPrecioMesAuto(int precioMesAuto) {
+void Precio::setPrecioMesAuto(float precioMesAuto) {
     _precioMesAuto = precioMesAuto;
 }
 
@@ -48,14 +48,14 @@ void Precio::setPrecioMesAuto(int precioMesAuto) {
 
 //// SETTERS DE CAMIONETA
 
-void Precio::setPrecioHoraCamioneta(int precioHoraCamioneta) {
+void Precio::setPrecioHoraCamioneta(float precioHoraCamioneta) {
     _precioHoraCamioneta = precioHoraCamioneta;
 }
 
-void Precio::setPrecioDiaCamioneta(int precioDiaCamioneta) {
+void Precio::setPrecioDiaCamioneta(float precioDiaCamioneta) {
     _precioDiaCamioneta = precioDiaCamioneta;
 }
-void Precio::setPrecioMesCamioneta(int precioMesCamioneta) {
+void Precio::setPrecioMesCamioneta(float precioMesCamioneta) {
     _precioMesCamioneta = precioMesCamioneta;
 }
 

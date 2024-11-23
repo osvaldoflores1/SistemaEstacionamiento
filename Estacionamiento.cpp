@@ -20,13 +20,13 @@ int Estacionamiento::getLugaresDisponibles() const {
 // Setter para nombre
 void Estacionamiento::setNombre(const char* nombre) {
     strncpy(this->nombre, nombre, sizeof(this->nombre) - 1);
-    this->nombre[sizeof(this->nombre) - 1] = '\0';  // Asegurar terminador nulo
+    this->nombre[sizeof(this->nombre) - 1] = '\0';
 }
 
 // Setter para CUIT
 void Estacionamiento::setCuit(const char* cuit) {
     strncpy(this->cuit, cuit, sizeof(this->cuit) - 1);
-    this->cuit[sizeof(this->cuit) - 1] = '\0';  // Asegurar terminador nulo
+    this->cuit[sizeof(this->cuit) - 1] = '\0';
 }
 
 // Setter para lugares disponibles

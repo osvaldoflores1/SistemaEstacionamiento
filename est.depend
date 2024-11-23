@@ -67,15 +67,19 @@
 	<string>
 	<iostream>
 
-1732231695 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menumanager.h
+1732362727 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menumanager.h
+	<string>
+	"Vehiculo.h"
 
-1732292230 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menumanager.cpp
+1732362175 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\menumanager.cpp
 	"MenuManager.h"
 	<iostream>
 	"Vehiculo.h"
 	"Estacionamiento.h"
 	"ArchivosManager.h"
 	"Precio.h"
+	<cstring>
+	<fstream>
 
 1732280662 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\vehiculo.cpp
 	<iostream>
@@ -87,13 +91,13 @@
 	<string>
 	<ctime>
 
-1730851858 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\estacionamiento.cpp
+1732362186 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\estacionamiento.cpp
 	"Estacionamiento.h"
 	<cstring>
 
 1730851445 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\estacionamiento.h
 
-1732292475 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivosmanager.cpp
+1732362175 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivosmanager.cpp
 	"ArchivosManager.h"
 	<cstring>
 	<cstdio>
@@ -102,7 +106,7 @@
 	"Precio.h"
 	<fstream>
 
-1732290998 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivosmanager.h
+1732360328 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\archivosmanager.h
 	"Estacionamiento.h"
 	"Precio.h"
 	<iostream>
@@ -110,13 +114,13 @@
 	<cstdio>
 	"Vehiculo.h"
 
-1731778493 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\precio.cpp
+1732321823 source:c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\precio.cpp
 	<iostream>
 	<cstring>
 	<string>
 	"Precio.h"
 
-1732281862 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\precio.h
+1732321547 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\precio.h
 	<string>
 
 1732279634 c:\users\osval\onedrive\escritorio\recuperatoriogeneral\est\fechahora.h
