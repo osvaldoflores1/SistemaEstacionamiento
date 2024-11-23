@@ -67,7 +67,7 @@ bool ArchivosManager::leerPrecios(float precios[]) {
     std::ifstream file(_nombreArchivo, std::ios::binary);
     if (!file) return false;
 
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 3; ++i) {
         file.read(reinterpret_cast<char*>(&precios[i]), sizeof(float));
         if (!file) return false; // Error en la lectura
     }
@@ -93,10 +93,8 @@ bool ArchivosManager::modificarPrecio(int campo, float nuevoValor) {
     switch (campo) {
         case 0: precio.setPrecioHoraAuto(nuevoValor); break;
         case 1: precio.setPrecioDiaAuto(nuevoValor); break;
-        case 2: precio.setPrecioMesAuto(nuevoValor); break;
-        case 3: precio.setPrecioHoraCamioneta(nuevoValor); break;
-        case 4: precio.setPrecioDiaCamioneta(nuevoValor); break;
-        case 5: precio.setPrecioMesCamioneta(nuevoValor); break;
+        case 2: precio.setPrecioHoraCamioneta(nuevoValor); break;
+        case 3: precio.setPrecioDiaCamioneta(nuevoValor); break;
         default:
             fclose(p);
             return false;

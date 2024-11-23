@@ -22,7 +22,6 @@ void MenuManager::menuPrincipal() {
         cout << "4. EGRESO DE VEHICULOS" << endl;
         cout << "5. MODIFICACION DE PRECIOS" << endl;
         cout << "6. LISTADO DE VEHICULOS INGRESADOS" << endl;
-        cout << "7. REPORTES" << endl;
         cout << "0. SALIR" << endl;
         cout << "Seleccione una opcion: ";
         cin >> seleccion;
@@ -48,9 +47,6 @@ void MenuManager::menuPrincipal() {
             case 6:
                 listadoVehiculos();
                 break;
-            case 7:
-
-                break;
 
             case 0:
                 finDeMenu = true;
@@ -72,11 +68,9 @@ void MenuManager::menuAltaEstacionamiento() {
     char cuit[15];
     int lugares;
     int precioHoraAuto;
-    int precioMesAuto;
     int precioDiaAuto;
     int precioHoraCamioneta;
     int precioDiaCamioneta;
-    int precioMesCamioneta;
 
     cout << "Ingrese nombre del estacionamiento: ";
     cin.ignore();
@@ -89,26 +83,21 @@ void MenuManager::menuAltaEstacionamiento() {
     cin >> precioHoraAuto;
     cout << "Ingrese la tarifa del dia de auto:  ";
     cin >> precioDiaAuto;
-    cout << "Ingrese la tarifa del mes de auto:  ";
-    cin >> precioMesAuto;
 
 
     cout << "Ingrese la tarifa de la hora de camioneta:  ";
     cin >> precioHoraCamioneta;
     cout << "Ingrese la tarifa del dia de camioneta:  ";
     cin >> precioDiaCamioneta;
-    cout << "Ingrese la tarifa del mes de camioneta:  ";
-    cin >> precioMesCamioneta;
+
 
     estacionamiento.setNombre(nombre);
     estacionamiento.setCuit(cuit);
     estacionamiento.setLugaresDisponibles(lugares);
     precio.setPrecioDiaAuto(precioDiaAuto);
     precio.setPrecioHoraAuto(precioHoraAuto);
-    precio.setPrecioMesAuto(precioMesAuto);
 
     precio.setPrecioDiaCamioneta(precioDiaCamioneta);
-    precio.setPrecioMesCamioneta(precioMesCamioneta);
     precio.setPrecioHoraCamioneta(precioHoraCamioneta);
 
     if (archivoManager.guardarEstacionamiento(estacionamiento) && archivoPrecios.guardarPrecio(precio)) {
@@ -180,26 +169,34 @@ void MenuManager::menuEgresoVehiculos() {
         return;
     }
 
+
+    time_t fechaEgreso = time(nullptr);
+    double horasEstacionado = difftime(fechaEgreso, vehiculoEncontrado.getFechaHoraIngreso()) / 3600;
+    int tipoVehiculo = vehiculoEncontrado.getTipo();
     // Leer precios del archivo
     ArchivosManager archivoPrecios("precios");
-    float precios[6];
+    float precios[4];
     if (!archivoPrecios.leerPrecios(precios)) {
         cout << "Error al leer los precios." << endl;
         system("pause");
         return;
     }
+    int indicePrecioHora = (tipoVehiculo == 1) ? 0 : 2;  // Auto o Camioneta (por hora)
+    int indicePrecioEstadia = (tipoVehiculo == 1) ? 1 : 3;  // Auto o Camioneta (por estadía)
 
-    // Calcular el tiempo de estacionamiento
-    time_t fechaEgreso = time(nullptr);
-    double horasEstacionado = difftime(fechaEgreso, vehiculoEncontrado.getFechaHoraIngreso()) / 3600;
+    float precioFinal = 0.0;
 
-    // Determinar el tipo de vehículo y precio por hora
-    int indicePrecio = (vehiculoEncontrado.getTipo() == 1) ? 0 : 3; // Auto o camioneta
-    float precioFinal = horasEstacionado * precios[indicePrecio];
+    if (horasEstacionado <= 12) {
+        precioFinal = horasEstacionado * precios[indicePrecioHora];
+        cout << "Cobro por hora: $" << precios[indicePrecioHora] << "/hora" << endl;
+    } else {
+        precioFinal = precios[indicePrecioEstadia];
+        cout << "Cobro por estadia: $" << precios[indicePrecioEstadia] << endl;
+    }
 
     cout << "Horas estacionado: " << horasEstacionado << endl;
-    cout << "Precio por hora: $" << precios[indicePrecio] << endl;
     cout << "Total a pagar: $" << precioFinal << endl;
+
 
     // Eliminar el vehículo del archivo
     if (archivoVehiculos.eliminarVehiculoPorPatente(patente)) {
@@ -241,10 +238,8 @@ void MenuManager:: menuModificacionPrecios(){
         cout << "---------------------------------"<< endl;
         cout << "Hora auto: " << reg.getPrecioHoraAuto() << endl;
         cout << "Dia auto: " << reg.getPrecioDiaAuto() << endl;
-        cout << "Mes auto: " << reg.getPrecioMesAuto() << endl;
         cout << "Hora camioneta: " << reg.getPrecioHoraCamioneta() << endl;
         cout << "Dia camioneta: " << reg.getPrecioDiaCamioneta() << endl;
-        cout << "Mes camioneta: " << reg.getPrecioMesCamioneta() << endl;
         cout << "---------------------------------" << endl;
     }
 
@@ -263,10 +258,8 @@ void MenuManager:: menuModificacionPrecios(){
             cout << "---------------------------------" << endl;
             cout << "1 - HORA AUTO." << endl;
             cout << "2 - DIA AUTO." << endl;
-            cout << "3 - MES AUTO." << endl;
-            cout << "4 - HORA CAMIONETA." << endl;
-            cout << "5 - DIA CAMIONETA." << endl;
-            cout << "6 - MES CAMIONETA." << endl;
+            cout << "3 - HORA CAMIONETA." << endl;
+            cout << "4 - DIA CAMIONETA." << endl;
             cout << "SELECCIONE LA OPCION A MODIFICAR: ";
             cin >> opcion;
 

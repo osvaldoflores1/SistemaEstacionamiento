@@ -14,9 +14,8 @@ float Precio::getPrecioHoraAuto() const {
 float Precio::getPrecioDiaAuto() const {
     return _precioDiaAuto;
 }
-float Precio::getPrecioMesAuto() const {
-    return _precioMesAuto;
-}
+
+
 
 ///// GETTERS DE  CAMIONETA
 float Precio::getPrecioHoraCamioneta() const {
@@ -24,9 +23,6 @@ float Precio::getPrecioHoraCamioneta() const {
 }
 float Precio::getPrecioDiaCamioneta() const {
     return _precioDiaCamioneta;
-}
-float Precio::getPrecioMesCamioneta() const {
-    return _precioMesCamioneta;
 }
 
 
@@ -40,9 +36,6 @@ void Precio::setPrecioHoraAuto(float precioHoraAuto) {
 void Precio::setPrecioDiaAuto(float precioDiaAuto) {
     _precioDiaAuto = precioDiaAuto;
 }
-void Precio::setPrecioMesAuto(float precioMesAuto) {
-    _precioMesAuto = precioMesAuto;
-}
 
 
 
@@ -54,9 +47,6 @@ void Precio::setPrecioHoraCamioneta(float precioHoraCamioneta) {
 
 void Precio::setPrecioDiaCamioneta(float precioDiaCamioneta) {
     _precioDiaCamioneta = precioDiaCamioneta;
-}
-void Precio::setPrecioMesCamioneta(float precioMesCamioneta) {
-    _precioMesCamioneta = precioMesCamioneta;
 }
 
 
